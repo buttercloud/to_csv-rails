@@ -9,7 +9,13 @@ class Array
     if options[:only]
       columns = Array(options[:only]).map(&:to_sym)
     else
-      columns = self.first.class.column_names.map(&:to_sym) - Array(options[:except]).map(&:to_sym)
+			if self.first.class.respond_to?(:column_names)
+				columns = self.first.class.column_names
+			elsif self.first.class.respond_to?(:schema)
+				columns = self.first.class.schema.keys
+			end
+			
+      columns = columns.map(&:to_sym) - Array(options[:except]).map(&:to_sym)
     end
     
     return '' if columns.empty?
