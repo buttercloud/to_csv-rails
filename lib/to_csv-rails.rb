@@ -22,7 +22,7 @@ class Array
     
     data = []
     # header
-    data << columns.map(&:to_s).map(&:humanize).join(', ') if options[:header]
+    data << (options[:headings] || columns.map(&:to_s).map(&:humanize)).join(', ') if options[:header]
 
     self.each do |obj|
       data << columns.map{ |column| obj.send(column) }.join(', ')
