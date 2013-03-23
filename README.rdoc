@@ -4,7 +4,11 @@ This simple plugin gives you the ability to call to_csv to a collection of activ
 
 == This Fork: 
 
-Supports ActiveResource modles backed with an API in addition to ActiveRecord models.
+* Supports ActiveResource modles backed with an API in addition to ActiveRecord models.
+* Supports a custom ":headings" option to specify different wording on the CSV headers
+* Adds the ability to specify a nested array within the :only argument to call a method chain. This makes it easier to reference associations, ex:
+    
+		@cars.to_csv(only: [:make_with_model, [:driver, :name]]) # calls car.driver.name on each record in the collection
 
 == Usage
 
